@@ -1,0 +1,18 @@
+file:
+  service:
+    hessian:
+      urls: http://192.168.1.11:8080/webroot/remoting/hessian/fileService.htm
+koto: http://koto.renturbo.com:9080/
+logging:
+  level:
+    root: INFO
+    org.topcat: DEBUG
+spring:
+  data:
+    mongodb:
+      uri: mongodb://192.168.1.11:27017
+      database: archives
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp

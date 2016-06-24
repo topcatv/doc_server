@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-lazy-init="true">
+	
+	<bean id="fileService" class="org.topcat.docserver.service.FileServiceImpl">
+		<property name="hessianConnectTimeout" value="1000"></property>
+		<property name="hessianReadTimeout" value="2000"></property>
+		<property name="hessianUrls" value="${file.service.hessian.urls}"></property>
+	</bean>
+
+</beans>
