@@ -13,10 +13,10 @@ public class Application extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(Application.class).sources("classpath*:spring-*.xml");
+        return application.sources(Application.class);
     }
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(new Object[]{"classpath*:spring-*.xml", Application.class}, args);
+        SpringApplication.run(new Object[]{Application.class}, args);
     }
 }
