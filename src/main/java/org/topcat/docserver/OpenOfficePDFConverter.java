@@ -23,7 +23,7 @@ public class OpenOfficePDFConverter implements PDFConverter {
 
 	public static void main(String[] args) {
 		OpenOfficePDFConverter openOfficePDFConverter = new OpenOfficePDFConverter();
-		openOfficePDFConverter.convert2PDF("/Users/topcat/Downloads/刘宗莲android开发2年.doc");
+		openOfficePDFConverter.convert2PDF("/Users/topcat/Downloads/6-6平台改版.docx");
 	}
 
 	public void convert2PDF(String inputFile) {
