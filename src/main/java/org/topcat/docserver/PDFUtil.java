@@ -1,22 +1,25 @@
 package org.topcat.docserver;
 
-import com.itextpdf.text.*;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.*;
 import com.itextpdf.text.pdf.security.*;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.*;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
-
-import static com.itextpdf.text.pdf.PdfName.DEST;
 
 /**
  * 最近的项目中使用Itext将txt文件转换为PDF文件， 并且实现对文件的一些权限控制。 现实对pdf文件加
  * 密，添加水印等。
  */
-public class PDFConvert {
+public class PDFUtil {
     // txt原始文件的路径
     private static final String SRC_PDF_PATH = "/Users/topcat/Downloads/6-6平台改版.docx.pdf";
     // 生成的pdf文件路径
@@ -33,7 +36,7 @@ public class PDFConvert {
     Certificate[] chain;
     BouncyCastleProvider provider;
 
-    public PDFConvert() {
+    public PDFUtil() {
         try {
             KeyStore ks = KeyStore.getInstance("jks");
             ks.load(new FileInputStream(KEYSTORE), CERT_PWD);
@@ -138,9 +141,9 @@ public class PDFConvert {
     }
 
     public static void main(String[] args) throws IOException, DocumentException {
-        PDFConvert pdfConvert = new PDFConvert();
+        PDFUtil pdfUtil = new PDFUtil();
 
-        pdfConvert.waterMark(SRC_PDF_PATH, WATERMARK_PDF_PATH, "水印文字");
-        pdfConvert.sign(WATERMARK_PDF_PATH, SIGN_DEST, "created", "wh", "123");
+        pdfUtil.waterMark(SRC_PDF_PATH, WATERMARK_PDF_PATH, "水印文字");
+        pdfUtil.sign(WATERMARK_PDF_PATH, SIGN_DEST, "created", "wh", "123");
     }
 }
