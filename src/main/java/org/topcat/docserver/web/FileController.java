@@ -12,9 +12,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -55,22 +57,23 @@ public class FileController {
     }
 
     @RequestMapping(path = "/{fileID}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.MOVED_PERMANENTLY)
     public void get(@PathVariable("fileID") String fileID, HttpServletResponse res) {
-        try {
-            Optional<GridFSDBFile> optionalCreated = maybeLoadFile(fileID);
-            if (optionalCreated.isPresent()) {
-                GridFSDBFile created = optionalCreated.get();
-                OutputStream os = res.getOutputStream();
-                created.writeTo(os);
-                HttpHeaders headers = new HttpHeaders();
-                res.setHeader(HttpHeaders.CONTENT_TYPE, created.getContentType());
-                os.flush();
-            } else {
-                res.setStatus(HttpStatus.NOT_FOUND.value());
-            }
-        } catch (IOException e) {
-            res.setStatus(HttpStatus.IM_USED.value());
-        }
+        res.setHeader("Location", "//192.168.1.11:8080/webroot/fs/"+fileID+".pdf");
+//        try {
+//            Optional<GridFSDBFile> optionalCreated = maybeLoadFile(fileID);
+//            if (optionalCreated.isPresent()) {
+//                GridFSDBFile created = optionalCreated.get();
+//                OutputStream os = res.getOutputStream();
+//                created.writeTo(os);
+//                res.setHeader(HttpHeaders.CONTENT_TYPE, created.getContentType());
+//                os.flush();
+//            } else {
+//                res.setStatus(HttpStatus.NOT_FOUND.value());
+//            }
+//        } catch (IOException e) {
+//            res.setStatus(HttpStatus.IM_USED.value());
+//        }
     }
 
     private List<GridFSDBFile> getFiles() {
